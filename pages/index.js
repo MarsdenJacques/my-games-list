@@ -1,11 +1,11 @@
 import styles from '../styles/Home.module.css'
-import GameListing from '../components/game-listing.js'
+import GameTile from '../components/game-tile.js'
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <GameListing title = "Mario" rating = {4}/>
-      <GameListing title = "Zelda" rating = {5}/>
+      <GameTile title = "Mario" username = 'zingari'/>
+      <GameTile title = "Zelda" username = 'algus'/>
     </div>
   )
 }
