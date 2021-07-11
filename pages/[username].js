@@ -31,6 +31,8 @@ export default function UserProfile()
 
     //fetch user info
 
+    //will have reviews list, two games lists (highlighted and normal), maybe highlighted is like a tray or something instead
+
     return(
         <section>
             <div>{username}</div>
@@ -38,9 +40,9 @@ export default function UserProfile()
                 list of games here
             </div>
             {games.map(game => {
-                        return (<div key = {game}>
-                            {game}
-                        </div>
+                return (<div key = {game}>
+                    {game}
+                </div>
             )})}
             <p>Game count: {games.length}</p>
         </section>

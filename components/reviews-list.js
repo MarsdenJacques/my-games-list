@@ -10,33 +10,11 @@ export default function Reviews(props)
     let title = props.title
     let username = props.username
     let noLink = props.noLink
-
-    const [reviews, setReviews] = useState([])
+    
     const [reviewCount, setReviewCount] = useState(0)
-    const [averageRating, setAverageRating] = useState(4.25)
     const [selectedRating, setSelectedRating] = useState(0)
 
-
-    useEffect(() => {
-        if(title !== undefined)
-        {
-            let query = {count: reviewCount, rating: selectedRating}
-            let url = new URL('http://localhost:3005/library/' + title + '/reviews')
-            url.search = new URLSearchParams(query).toString();
-            fetch(url, {
-                method: 'GET'
-            }).then((res) => {
-                if(res.status !== 200)
-                {
-                    console.log('error')
-                    return null
-                }
-                return res.json()
-            }).then((data) => {
-                setReviews(data)
-            })
-        }
-    },[title, selectedRating, reviewCount]) 
+    //move fetch to next level above
 
     //reviews list state
     //reviews filter?
@@ -44,11 +22,14 @@ export default function Reviews(props)
 
     return(
         <div>
-            <ListSieve selectedRating = {selectedRating} displayedRating = {selectedRating === 0 ? averageRating : selectedRating} totalReviews = {60}
+            <ListSieve selectedRating = {selectedRating} displayedRating = {selectedRating === 0 ? props.averageRating : selectedRating} totalReviews = {props.reviews.length}
             onSelectRating = {(rating) => {setSelectedRating(rating)}} onSelectCount = {(count) => {setReviewCount(count)}}/>
             <Rating title = {title} username = {username} noLink = {noLink}/>
             <Review rating = {5} text = 'This game is great!'/>
-            <div>{reviews.map(review => <div key = {review}>{review}</div>)}</div> 
+            <div>{props.reviews.map(review => <div key = {review}>{review}</div>)}</div>
+            <div>review count: {props.reviews.length}</div>
+            <div>average rating: {props.averageRating}</div>
         </div>
     )
 }
+//only map while rating and count under value, load all at start

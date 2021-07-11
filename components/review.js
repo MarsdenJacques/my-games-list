@@ -2,6 +2,9 @@ import Link from 'next/link'
 
 export default function Review ({rating, text, username})
 {
+
+    //add ability to like (will require patch)
+
     let userLink = '/' + username
     return(
         <div>
